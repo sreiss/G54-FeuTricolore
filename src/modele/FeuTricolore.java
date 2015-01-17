@@ -1,15 +1,17 @@
 package modele;
 
+import observateur.Sujet;
+
 /**
  * Created by Simon on 14/01/2015.
  */
-public class FeuTricolore {
-    private static final boolean EN_STAND_BY = false;
-    private static final boolean EN_MARCHE = true;
+public class FeuTricolore extends Sujet {
+    public static final boolean EN_STAND_BY = false;
+    public static final boolean EN_MARCHE = true;
 
-    private static final int PASSEZ = 0;
-    private static final int ATTENTION = 1;
-    private static final int STOP = 2;
+    public static final int PASSEZ = 0;
+    public static final int ATTENTION = 1;
+    public static final int STOP = 2;
 
     private boolean etat;
     private int conduite;
@@ -47,5 +49,9 @@ public class FeuTricolore {
 
     public boolean estEnMarche() {
         return etat == EN_MARCHE;
+    }
+
+    public int getConduite() {
+        return conduite;
     }
 }
