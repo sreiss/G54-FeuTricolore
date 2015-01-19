@@ -1,6 +1,10 @@
 package vue;
 
 import modele.FeuTricolore;
+import observateur.Observateur;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Simon on 15/01/2015.
@@ -9,8 +13,27 @@ public class InterfaceTexte extends InterfaceAbstraite {
     private String ligneEtat;
     private String ligneConduite;
 
-    public InterfaceTexte (FeuTricolore feuTricolore) {
-        super(feuTricolore);
+    private JPanel jpInterfaceTexte = new JPanel(new BorderLayout());
+    private JPanel jpLignes = new JPanel();
+
+    private JTextField jtfLigneEtat = new JTextField();
+    private JTextField jtfLigneConduite = new JTextField();
+
+    public InterfaceTexte (String titre, FeuTricolore feuTricolore) {
+        super(titre, feuTricolore);
+
+        jtfLigneConduite.setEnabled(false);
+        jtfLigneEtat.setEnabled(false);
+        jpLignes.add(jtfLigneEtat);
+        jpLignes.add(jtfLigneConduite);
+        miseAJour();
+        jpLignes.setLayout(new BoxLayout(jpLignes, BoxLayout.Y_AXIS));
+
+        jpInterfaceTexte.add(jpLignes, BorderLayout.NORTH);
+        jpInterfaceTexte.add(jpBoutons, BorderLayout.SOUTH);
+
+        this.add(jpInterfaceTexte);
+        super.pack();
     }
 
     @Override
@@ -28,6 +51,7 @@ public class InterfaceTexte extends InterfaceAbstraite {
         } else {
             throw new IllegalStateException("Cet etat n'existe pas.");
         }
+        jtfLigneEtat.setText(ligneEtat);
     }
 
     private void mettreAJourLigneConduite() {
@@ -45,5 +69,6 @@ public class InterfaceTexte extends InterfaceAbstraite {
             default:
                 throw new IllegalStateException("Ce mode de conduite n'existe pas.");
         }
+        jtfLigneConduite.setText(ligneConduite);
     }
 }

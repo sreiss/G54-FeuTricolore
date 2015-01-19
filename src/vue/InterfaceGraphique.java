@@ -2,16 +2,29 @@ package vue;
 
 import modele.FeuTricolore;
 
+import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
  * Created by Simon on 14/01/2015.
  */
 public class InterfaceGraphique extends InterfaceAbstraite {
-    private Color couleur;
+    private Color couleur = Color.GRAY;
 
-    public InterfaceGraphique(FeuTricolore feuTricolore) {
-        super(feuTricolore);
+    private JPanel jpInterfaceGraphique = new JPanel(new BorderLayout());
+    private JPanel jpCouleur = new JPanel();
+
+    public InterfaceGraphique(String titre, FeuTricolore feuTricolore) {
+        super(titre, feuTricolore);
+
+        miseAJour();
+
+        jpInterfaceGraphique.add(jpCouleur, BorderLayout.NORTH);
+        jpInterfaceGraphique.add(jpBoutons, BorderLayout.SOUTH);
+
+        this.add(jpInterfaceGraphique);
+        super.pack();
     }
 
     @Override
@@ -40,5 +53,6 @@ public class InterfaceGraphique extends InterfaceAbstraite {
         } else {
             throw new IllegalStateException("Cet etat n'existe pas.");
         }
+        jpCouleur.setBackground(couleur);
     }
 }

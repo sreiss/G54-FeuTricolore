@@ -16,30 +16,41 @@ public class FeuTricolore extends Sujet {
     private boolean etat;
     private int conduite;
 
+    public FeuTricolore() {
+        etat = EN_STAND_BY;
+        conduite = STOP;
+    }
+
     public void arreter() {
         if (estEnMarche()) {
             etat = EN_STAND_BY;
-            conduite = 2;
+            conduite = STOP;
         }
+        notifierMesObservateurs();
     }
 
     public void demarrer() {
         if (estArrete()) {
             etat = EN_MARCHE;
+            conduite = STOP;
         }
+        notifierMesObservateurs();
     }
 
     public void changer() {
-        switch (conduite) {
-            case PASSEZ:
-                conduite = ATTENTION;
-                break;
-            case ATTENTION:
-                conduite = STOP;
-                break;
-            default:
-                conduite = PASSEZ;
-                break;
+        if (estEnMarche()) {
+            switch (conduite) {
+                case PASSEZ:
+                    conduite = ATTENTION;
+                    break;
+                case ATTENTION:
+                    conduite = STOP;
+                    break;
+                default:
+                    conduite = PASSEZ;
+                    break;
+            }
+            notifierMesObservateurs();
         }
     }
 
