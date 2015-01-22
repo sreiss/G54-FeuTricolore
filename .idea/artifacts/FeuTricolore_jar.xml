@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FeuTricolore:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FeuTricolore_jar</output-path>
+    <root id="archive" name="FeuTricolore.jar">
+      <element id="module-output" name="FeuTricolore" />
+    </root>
+  </artifact>
+</component>
